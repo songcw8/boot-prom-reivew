@@ -1,5 +1,6 @@
 package org.example.bootpromreivew.controller;
 
+import io.micrometer.core.annotation.Counted;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,12 @@ public class PromController {
     @GetMapping("/wait")
     public ResponseEntity<Void> getWait() throws InterruptedException {
         Thread.sleep(new Random().nextInt(1000, 5000));
+        return ResponseEntity.ok().build();
+    }
+
+    @Counted(value = "count.money", description = "Money count")
+    @GetMapping("/money")
+    public ResponseEntity<Void> getMoney() {
         return ResponseEntity.ok().build();
     }
 }
